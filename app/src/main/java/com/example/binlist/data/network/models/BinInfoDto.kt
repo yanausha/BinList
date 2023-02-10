@@ -4,17 +4,17 @@ import com.google.gson.annotations.SerializedName
 
 data class BinInfoDto(
     @SerializedName("bank")
-    val bank: BankDto,
+    val bank: BankDto?,
     @SerializedName("brand")
-    val brand: String,
+    val brand: String?,
     @SerializedName("country")
-    val country: CountryDto,
+    val country: CountryDto?,
     @SerializedName("number")
-    val number: NumberDto,
+    val number: NumberDto?,
     @SerializedName("prepaid")
-    val prepaid: Boolean,
+    val prepaid: Boolean?,
     @SerializedName("scheme")
-    val scheme: String,
+    val scheme: String?,
     @SerializedName("type")
-    val type: String
+    val type: String?
 )
