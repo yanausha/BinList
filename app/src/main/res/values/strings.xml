@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BinList</string>
+    <string name="hint_text_input_layout">BIN/IIN</string>
+    <string name="button_text_input">get info</string>
 </resources>
