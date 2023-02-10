@@ -2,4 +2,22 @@
     <string name="app_name">BinList</string>
     <string name="hint_text_input_layout">BIN/IIN</string>
     <string name="button_text_input">get info</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="bin_iin">BIN/IIN</string>
+    <string name="scheme_network">SCHEME / NETWORK</string>
+    <string name="brand">BRAND</string>
+    <string name="card_number">CARD NUMBER</string>
+    <string name="length">LENGTH</string>
+    <string name="luhn">LUHN</string>
+    <string name="slash">/</string>
+    <string name="debit">Debit</string>
+    <string name="credit">Credit</string>
+    <string name="type">TYPE</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="country">COUNTRY</string>
+    <string name="coordinates">(latitude: %d, longitude: %d)</string>
+    <string name="bank">BANK</string>
+    <string name="prepaid">PREPAID</string>
 </resources>
