@@ -52,29 +52,31 @@ class BinDetailInfoFragment : Fragment() {
         viewModel.binInfo.observe(viewLifecycleOwner) {
             with(binding) {
                 textViewBin.text = bin
-                textViewScheme.text = it.scheme ?: "-"
-                textViewBrand.text = it.brand ?: "-"
-                textViewCardNumberLength.text = it.number?.length.toString()
+                textViewScheme.text = it.scheme ?: EMPTY_SYMBOL
+                textViewBrand.text = it.brand ?: EMPTY_SYMBOL
+                it.number?.length.let {
+                    textViewCardNumberLength.text = it?.toString() ?: EMPTY_SYMBOL
+                }
                 when(it.number?.luhn) {
                     true -> textViewCardNumberLuhnYes.setTextAppearance(R.style.DetailInfoBooleanStyle)
                     false -> textViewCardNumberLuhnNo.setTextAppearance(R.style.DetailInfoBooleanStyle)
-                    else -> throw RuntimeException("LUHN is null")
+                    else -> null
                 }
                 when (it.type) {
                     "debit" -> textViewTypeDebit.setTextAppearance(R.style.DetailInfoBooleanStyle)
                     "credit" -> textViewTypeCredit.setTextAppearance(R.style.DetailInfoBooleanStyle)
-                    else -> throw RuntimeException("TYPE is null")
+                    else -> null
                 }
                 when(it.prepaid) {
                     true -> textViewPrepaidYes.setTextAppearance(R.style.DetailInfoBooleanStyle)
                     false -> textViewPrepaidNo.setTextAppearance(R.style.DetailInfoBooleanStyle)
-                    else -> throw RuntimeException("PREPAID is null")
+                    else -> null
                 }
-                textViewCountry.text = it.country?.emoji ?: "-"
-                textViewCountryName.text = it.country?.name ?: "-"
-                textViewBankName.text = it.bank?.name ?: "-"
-                textViewBankSite.text = it.bank?.url ?: "-"
-                textViewBankPhone.text = it.bank?.phone ?: "-"
+                textViewCountry.text = it.country?.emoji ?: EMPTY_SYMBOL
+                textViewCountryName.text = it.country?.name ?: EMPTY_SYMBOL
+                textViewBankName.text = it.bank?.name ?: EMPTY_SYMBOL
+                textViewBankSite.text = it.bank?.url ?: EMPTY_SYMBOL
+                textViewBankPhone.text = it.bank?.phone ?: EMPTY_SYMBOL
             }
         }
     }
