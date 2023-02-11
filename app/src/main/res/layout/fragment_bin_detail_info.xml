@@ -41,7 +41,6 @@
             tools:text="Visa/Dankort" />
 
         <TextView
-            android:id="@+id/textViewCardNumber"
             style="@style/DetailInfoTitleStyle"
             android:text="@string/card_number" />
 
@@ -81,6 +80,7 @@
                     <TextView
                         android:id="@+id/textViewCardNumberLuhnYes"
                         style="@style/DetailInfoTextStyle"
+                        android:textStyle="normal"
                         android:text="@string/yes" />
 
                     <TextView
@@ -107,6 +107,7 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/textViewTypeDebit"
                 style="@style/DetailInfoTextStyle"
                 android:text="@string/debit" />
 

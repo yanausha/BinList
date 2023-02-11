@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun launchMainFragment() {
+        supportFragmentManager.popBackStack()
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragmentContainerView, MainFragment.newInstance())
