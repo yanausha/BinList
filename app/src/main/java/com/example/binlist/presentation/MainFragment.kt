@@ -40,7 +40,9 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.buttonTextInput.setOnClickListener {
             val bin = binding.textInputEditText.text.toString()
-            parentFragmentManager.beginTransaction()
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .addToBackStack(null)
                 .replace(R.id.fragmentContainerView, BinDetailInfoFragment.newInstance(bin))
                 .commit()
         }
@@ -54,10 +56,5 @@ class MainFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-
-        fun newInstance() = MainFragment()
     }
 }
