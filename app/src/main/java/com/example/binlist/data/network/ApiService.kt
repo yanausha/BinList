@@ -7,5 +7,5 @@ import retrofit2.http.Url
 interface ApiService {
 
     @GET
-    suspend fun getBinList(@Url bin: String): BinInfoDto
+    suspend fun getBinInfo(@Url bin: String): BinInfoDto
 }
