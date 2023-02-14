@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.binlist.R
 import com.example.binlist.databinding.FragmentMainBinding
+import com.example.binlist.presentation.adapter.BinListAdapter
 import javax.inject.Inject
 
 class MainFragment : Fragment() {
@@ -38,14 +39,30 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val binListAdapter = BinListAdapter()
+        binding.recyclerView.adapter = binListAdapter
+
         binding.buttonTextInput.setOnClickListener {
-            val bin = binding.textInputEditText.text.toString()
-            requireActivity().supportFragmentManager
-                .beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.fragmentContainerView, BinDetailInfoFragment.newInstance(bin))
-                .commit()
+            val bin = getBin()
+            startBinDetailInfoFragment(bin)
         }
+
+        viewModel.binItem.observe(viewLifecycleOwner) {
+            binListAdapter.submitList(it)
+        }
+    }
+
+    private fun startBinDetailInfoFragment(bin: String) {
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.fragmentContainerView, BinDetailInfoFragment.newInstance(bin))
+            .commit()
+    }
+
+    private fun getBin(): String {
+        return binding.textInputEditText.text.toString()
     }
 
     override fun onAttach(context: Context) {

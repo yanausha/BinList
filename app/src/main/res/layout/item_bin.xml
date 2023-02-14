@@ -21,7 +21,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textViewCountry"
+                android:id="@+id/textViewCountryEmoji"
                 style="@style/DetailInfoTextStyle"
                 tools:text="00" />
 

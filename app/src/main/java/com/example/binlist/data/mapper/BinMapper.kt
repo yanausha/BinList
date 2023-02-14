@@ -18,6 +18,13 @@ class BinMapper @Inject constructor() {
         binItem.bank
     )
 
+    fun mapDbModelToEntity(db: BinInfoDbModel) = BinItem(
+        db.bin,
+        db.smile,
+        db.country,
+        db.bank
+    )
+
     fun mapDtoToEntity(dto: BinInfoDto?) = BinInfo(
         mapDtoToEntity(dto?.bank),
         dto?.brand,

@@ -1,5 +1,7 @@
 package com.example.binlist.data.repository
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.example.binlist.data.database.BinInfoDao
 import com.example.binlist.data.mapper.BinMapper
 import com.example.binlist.data.network.ApiService
@@ -24,5 +26,13 @@ class BinRepositoryImpl @Inject constructor(
 
     override suspend fun addBinInfo(binItem: BinItem) {
         binInfoDao.addBinInfo(mapper.mapEntityToDbModel(binItem))
+    }
+
+    override fun getBinList(): LiveData<List<BinItem>> {
+        return Transformations.map(binInfoDao.getBinList()) {
+            it.map {
+                mapper.mapDbModelToEntity(it)
+            }
+        }
     }
 }

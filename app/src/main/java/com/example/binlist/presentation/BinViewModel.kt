@@ -8,14 +8,18 @@ import com.example.binlist.domain.entity.BinInfo
 import com.example.binlist.domain.usecase.AddBinInfoUseCase
 import com.example.binlist.domain.usecase.GetBinInfoUseCase
 import com.example.binlist.domain.usecase.GetBinItemUseCase
+import com.example.binlist.domain.usecase.GetBinListUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class BinViewModel @Inject constructor(
     private val getBinInfoUseCase: GetBinInfoUseCase,
     private val addBinInfoUseCase: AddBinInfoUseCase,
-    private val getBinItemUseCase: GetBinItemUseCase
+    private val getBinItemUseCase: GetBinItemUseCase,
+    private val getBinListUseCase: GetBinListUseCase
 ) : ViewModel() {
+
+    val binItem = getBinListUseCase()
 
     private val _binInfo = MutableLiveData<BinInfo>()
     val binInfo: LiveData<BinInfo>
