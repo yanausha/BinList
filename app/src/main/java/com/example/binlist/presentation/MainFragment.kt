@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.binlist.R
 import com.example.binlist.databinding.FragmentMainBinding
 import com.example.binlist.presentation.adapter.BinListAdapter
@@ -28,6 +30,8 @@ class MainFragment : Fragment() {
     private val binding: FragmentMainBinding
         get() = _binding ?: throw RuntimeException("FragmentMainBinding is null")
 
+    private lateinit var binListAdapter: BinListAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,7 +44,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val binListAdapter = BinListAdapter()
+        binListAdapter = BinListAdapter()
         binding.recyclerView.adapter = binListAdapter
 
         binding.buttonTextInput.setOnClickListener {
@@ -51,6 +55,30 @@ class MainFragment : Fragment() {
         viewModel.binItem.observe(viewLifecycleOwner) {
             binListAdapter.submitList(it)
         }
+
+        setupSwipeListener(binding.recyclerView)
+    }
+
+    private fun setupSwipeListener(recyclerView: RecyclerView) {
+        val callback = object : ItemTouchHelper.SimpleCallback(
+            0,
+            ItemTouchHelper.LEFT
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val item = binListAdapter.currentList[viewHolder.adapterPosition]
+                viewModel.deleteBinItem(item)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(callback)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
     private fun startBinDetailInfoFragment(bin: String) {
