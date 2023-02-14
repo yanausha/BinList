@@ -35,4 +35,8 @@ class BinRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun deleteBinItem(binItem: BinItem) {
+        binInfoDao.deleteBinInfo(binItem.bin)
+    }
 }
