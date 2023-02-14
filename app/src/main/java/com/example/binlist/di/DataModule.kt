@@ -1,5 +1,8 @@
 package com.example.binlist.di
 
+import android.app.Application
+import com.example.binlist.data.database.AppDatabase
+import com.example.binlist.data.database.BinInfoDao
 import com.example.binlist.data.network.ApiFactory
 import com.example.binlist.data.network.ApiService
 import com.example.binlist.data.repository.BinRepositoryImpl
@@ -19,6 +22,11 @@ interface DataModule {
         @Provides
         fun provideApiService(): ApiService {
             return ApiFactory.apiService
+        }
+
+        @Provides
+        fun provideBinInfoDao(application: Application): BinInfoDao {
+            return AppDatabase.getInstance(application).binInfoDao()
         }
     }
 }
