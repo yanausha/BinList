@@ -75,6 +75,13 @@ class BinDetailInfoFragment : Fragment() {
                 textViewCountry.text = it.country?.emoji ?: EMPTY_SYMBOL
                 textViewCountryName.text = it.country?.name ?: EMPTY_SYMBOL
                 textViewBankName.text = it.bank?.name ?: EMPTY_SYMBOL
+
+                textViewCountryCoordinates.text = String.format(
+                    getString(R.string.coordinates),
+                    it.country?.latitude ?: EMPTY_SYMBOL,
+                    it.country?.longitude ?: EMPTY_SYMBOL
+                )
+
                 textViewBankSite.text = it.bank?.url ?: EMPTY_SYMBOL
                 textViewBankPhone.text = it.bank?.phone ?: EMPTY_SYMBOL
             }
