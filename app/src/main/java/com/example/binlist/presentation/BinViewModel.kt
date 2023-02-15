@@ -45,12 +45,17 @@ class BinViewModel @Inject constructor(
         val longitude = binInfo.value?.country?.longitude
         val latitude = binInfo.value?.country?.latitude
         if (longitude != null && latitude != null) {
-
             val mapUri = Uri.parse("geo:$latitude,$longitude")
-            val intent = Intent(
-                Intent.ACTION_VIEW,
-                mapUri
-            )
+            val intent = Intent(Intent.ACTION_VIEW, mapUri)
+            context.startActivity(intent)
+        }
+    }
+
+    fun useCall(context: Context) {
+        val phoneNumber = binInfo.value?.bank?.phone
+        if (phoneNumber != null) {
+            val callUri = Uri.parse("tel:$phoneNumber")
+            val intent = Intent(Intent.ACTION_DIAL, callUri)
             context.startActivity(intent)
         }
     }

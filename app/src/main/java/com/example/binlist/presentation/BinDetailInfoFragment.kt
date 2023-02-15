@@ -51,10 +51,11 @@ class BinDetailInfoFragment : Fragment() {
             textViewCountryCoordinates.setOnClickListener {
                 viewModel.useMap(it.context)
             }
-
+            textViewBankPhone.setOnClickListener {
+                viewModel.useCall(it.context)
+            }
         }
     }
-
 
 
     private fun initViews(bin: String) {
@@ -66,7 +67,7 @@ class BinDetailInfoFragment : Fragment() {
                 it.number?.length.let {
                     textViewCardNumberLength.text = it?.toString() ?: EMPTY_SYMBOL
                 }
-                when(it.number?.luhn) {
+                when (it.number?.luhn) {
                     true -> textViewCardNumberLuhnYes.setTextAppearance(R.style.DetailInfoBooleanStyle)
                     false -> textViewCardNumberLuhnNo.setTextAppearance(R.style.DetailInfoBooleanStyle)
                     else -> null
@@ -76,7 +77,7 @@ class BinDetailInfoFragment : Fragment() {
                     "credit" -> textViewTypeCredit.setTextAppearance(R.style.DetailInfoBooleanStyle)
                     else -> null
                 }
-                when(it.prepaid) {
+                when (it.prepaid) {
                     true -> textViewPrepaidYes.setTextAppearance(R.style.DetailInfoBooleanStyle)
                     false -> textViewPrepaidNo.setTextAppearance(R.style.DetailInfoBooleanStyle)
                     else -> null
