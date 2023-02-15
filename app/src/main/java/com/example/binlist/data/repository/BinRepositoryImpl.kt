@@ -17,7 +17,7 @@ class BinRepositoryImpl @Inject constructor(
 ): BinRepository {
 
     override suspend fun getBinInfo(bin: String): BinInfo {
-        return mapper.mapDtoToEntity(apiService.getBinInfo(bin))
+        return mapper.mapDtoToEntity(apiService.getBinInfo(bin).body())
     }
 
     override suspend fun getBinItem(bin: String, binInfo: BinInfo): BinItem {
