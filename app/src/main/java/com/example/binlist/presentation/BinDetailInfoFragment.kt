@@ -46,7 +46,16 @@ class BinDetailInfoFragment : Fragment() {
         val bin = getBin()
         viewModel.getBinInfo(bin)
         initViews(bin)
+
+        with(binding) {
+            textViewCountryCoordinates.setOnClickListener {
+                viewModel.useMap(it.context)
+            }
+
+        }
     }
+
+
 
     private fun initViews(bin: String) {
         viewModel.binInfo.observe(viewLifecycleOwner) {
