@@ -46,7 +46,10 @@ class BinDetailInfoFragment : Fragment() {
         val bin = getBin()
         viewModel.getBinInfo(bin)
         initViews(bin)
+        useTransitions()
+    }
 
+    private fun useTransitions() {
         with(binding) {
             textViewCountryCoordinates.setOnClickListener {
                 viewModel.useMap(it.context)
@@ -54,9 +57,11 @@ class BinDetailInfoFragment : Fragment() {
             textViewBankPhone.setOnClickListener {
                 viewModel.useCall(it.context)
             }
+            textViewBankSite.setOnClickListener {
+                viewModel.useWebsite(it.context)
+            }
         }
     }
-
 
     private fun initViews(bin: String) {
         viewModel.binInfo.observe(viewLifecycleOwner) {

@@ -59,4 +59,13 @@ class BinViewModel @Inject constructor(
             context.startActivity(intent)
         }
     }
+
+    fun useWebsite(context: Context) {
+        val website = binInfo.value?.bank?.url
+        if (website != null) {
+            val webUri = Uri.parse("http://$website")
+            val intent = Intent(Intent.ACTION_VIEW, webUri)
+            context.startActivity(intent)
+        }
+    }
 }
