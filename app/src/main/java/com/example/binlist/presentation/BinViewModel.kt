@@ -1,5 +1,8 @@
 package com.example.binlist.presentation
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -35,6 +38,34 @@ class BinViewModel @Inject constructor(
     fun deleteBinItem(binItem: BinItem) {
         viewModelScope.launch {
             deleteBinItemUseCase(binItem)
+        }
+    }
+
+    fun useMap(context: Context) {
+        val longitude = binInfo.value?.country?.longitude
+        val latitude = binInfo.value?.country?.latitude
+        if (longitude != null && latitude != null) {
+            val mapUri = Uri.parse("geo:$latitude,$longitude")
+            val intent = Intent(Intent.ACTION_VIEW, mapUri)
+            context.startActivity(intent)
+        }
+    }
+
+    fun useCall(context: Context) {
+        val phoneNumber = binInfo.value?.bank?.phone
+        if (phoneNumber != null) {
+            val callUri = Uri.parse("tel:$phoneNumber")
+            val intent = Intent(Intent.ACTION_DIAL, callUri)
+            context.startActivity(intent)
+        }
+    }
+
+    fun useWebsite(context: Context) {
+        val website = binInfo.value?.bank?.url
+        if (website != null) {
+            val webUri = Uri.parse("http://$website")
+            val intent = Intent(Intent.ACTION_VIEW, webUri)
+            context.startActivity(intent)
         }
     }
 }

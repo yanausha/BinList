@@ -17,7 +17,7 @@
     <string name="yes">YES</string>
     <string name="no">NO</string>
     <string name="country">COUNTRY</string>
-    <string name="coordinates">(latitude: %d, longitude: %d)</string>
+    <string name="coordinates">(latitude: %s, longitude: %s)</string>
     <string name="bank">BANK</string>
     <string name="prepaid">PREPAID</string>
 </resources>
