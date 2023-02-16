@@ -16,16 +16,21 @@ class BinRepositoryImpl @Inject constructor(
     private val mapper: BinMapper
 ): BinRepository {
 
-    override suspend fun getBinInfo(bin: String): BinInfo {
-        return mapper.mapDtoToEntity(apiService.getBinInfo(bin).body())
+    override suspend fun getBinInfo(bin: String): BinInfo? {
+        val response = apiService.getBinInfo(bin)
+        return if (response.code() == 404) {
+            null
+        } else {
+            mapper.mapDtoToEntity(response.body())
+        }
     }
 
     override suspend fun getBinItem(bin: String, binInfo: BinInfo): BinItem {
         return BinItem(bin, binInfo.country?.emoji, binInfo.country?.name, binInfo.bank?.name)
     }
 
-    override suspend fun addBinInfo(binItem: BinItem) {
-        binInfoDao.addBinInfo(mapper.mapEntityToDbModel(binItem))
+    override suspend fun addBinInfo(binItem: BinItem?) {
+        binInfoDao.addBinInfo(binItem?.let { mapper.mapEntityToDbModel(it) })
     }
 
     override fun getBinList(): LiveData<List<BinItem>> {
