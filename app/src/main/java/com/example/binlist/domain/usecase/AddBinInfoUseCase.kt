@@ -6,5 +6,5 @@ import javax.inject.Inject
 
 class AddBinInfoUseCase @Inject constructor(private val repository: BinRepository) {
 
-    suspend operator fun invoke(binItem: BinItem) = repository.addBinInfo(binItem)
+    suspend operator fun invoke(binItem: BinItem?) = repository.addBinInfo(binItem)
 }
