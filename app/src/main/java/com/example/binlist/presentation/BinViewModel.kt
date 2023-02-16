@@ -23,15 +23,17 @@ class BinViewModel @Inject constructor(
 
     val binItem = getBinListUseCase()
 
-    private val _binInfo = MutableLiveData<BinInfo>()
-    val binInfo: LiveData<BinInfo>
+    private val _binInfo = MutableLiveData<BinInfo?>()
+    val binInfo: LiveData<BinInfo?>
         get() = _binInfo
 
     fun getBinInfo(bin: String) {
         viewModelScope.launch {
             _binInfo.value = getBinInfoUseCase(bin)
-            val binItem = getBinItemUseCase(bin, binInfo.value!!)
-            addBinInfoUseCase(binItem)
+             binInfo.value?.let {
+                val binItem = getBinItemUseCase(bin, it)
+                addBinInfoUseCase(binItem)
+            }
         }
     }
 

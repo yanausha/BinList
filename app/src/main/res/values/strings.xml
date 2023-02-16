@@ -20,4 +20,5 @@
     <string name="coordinates">(latitude: %s, longitude: %s)</string>
     <string name="bank">BANK</string>
     <string name="prepaid">PREPAID</string>
+    <string name="bin_unknown">Unknown BIN/IIN</string>
 </resources>

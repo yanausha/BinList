@@ -11,6 +11,7 @@
         android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:errorEnabled="true"
         android:hint="@string/hint_text_input_layout">
 
         <com.google.android.material.textfield.TextInputEditText

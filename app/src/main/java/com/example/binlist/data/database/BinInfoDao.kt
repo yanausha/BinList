@@ -13,7 +13,7 @@ interface BinInfoDao {
     fun getBinList(): LiveData<List<BinInfoDbModel>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addBinInfo(binInfo: BinInfoDbModel)
+    suspend fun addBinInfo(binInfo: BinInfoDbModel?)
 
     @Query("DELETE FROM binList WHERE bin=:bin")
     suspend fun deleteBinInfo(bin: String)

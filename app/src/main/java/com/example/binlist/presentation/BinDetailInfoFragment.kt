@@ -67,38 +67,38 @@ class BinDetailInfoFragment : Fragment() {
         viewModel.binInfo.observe(viewLifecycleOwner) {
             with(binding) {
                 textViewBin.text = bin
-                textViewScheme.text = it.scheme ?: EMPTY_SYMBOL
-                textViewBrand.text = it.brand ?: EMPTY_SYMBOL
-                it.number?.length.let {
+                textViewScheme.text = it?.scheme ?: EMPTY_SYMBOL
+                textViewBrand.text = it?.brand ?: EMPTY_SYMBOL
+                it?.number?.length.let {
                     textViewCardNumberLength.text = it?.toString() ?: EMPTY_SYMBOL
                 }
-                when (it.number?.luhn) {
+                when (it?.number?.luhn) {
                     true -> textViewCardNumberLuhnYes.setTextAppearance(R.style.DetailInfoBooleanStyle)
                     false -> textViewCardNumberLuhnNo.setTextAppearance(R.style.DetailInfoBooleanStyle)
                     else -> null
                 }
-                when (it.type) {
+                when (it?.type) {
                     "debit" -> textViewTypeDebit.setTextAppearance(R.style.DetailInfoBooleanStyle)
                     "credit" -> textViewTypeCredit.setTextAppearance(R.style.DetailInfoBooleanStyle)
                     else -> null
                 }
-                when (it.prepaid) {
+                when (it?.prepaid) {
                     true -> textViewPrepaidYes.setTextAppearance(R.style.DetailInfoBooleanStyle)
                     false -> textViewPrepaidNo.setTextAppearance(R.style.DetailInfoBooleanStyle)
                     else -> null
                 }
-                textViewCountry.text = it.country?.emoji ?: EMPTY_SYMBOL
-                textViewCountryName.text = it.country?.name ?: EMPTY_SYMBOL
-                textViewBankName.text = it.bank?.name ?: EMPTY_SYMBOL
+                textViewCountry.text = it?.country?.emoji ?: EMPTY_SYMBOL
+                textViewCountryName.text = it?.country?.name ?: EMPTY_SYMBOL
+                textViewBankName.text = it?.bank?.name ?: EMPTY_SYMBOL
 
                 textViewCountryCoordinates.text = String.format(
                     getString(R.string.coordinates),
-                    it.country?.latitude ?: EMPTY_SYMBOL,
-                    it.country?.longitude ?: EMPTY_SYMBOL
+                    it?.country?.latitude ?: EMPTY_SYMBOL,
+                    it?.country?.longitude ?: EMPTY_SYMBOL
                 )
 
-                textViewBankSite.text = it.bank?.url ?: EMPTY_SYMBOL
-                textViewBankPhone.text = it.bank?.phone ?: EMPTY_SYMBOL
+                textViewBankSite.text = it?.bank?.url ?: EMPTY_SYMBOL
+                textViewBankPhone.text = it?.bank?.phone ?: EMPTY_SYMBOL
             }
         }
     }
