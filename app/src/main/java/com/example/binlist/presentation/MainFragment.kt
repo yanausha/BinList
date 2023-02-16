@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -49,14 +50,28 @@ class MainFragment : Fragment() {
 
         binding.buttonTextInput.setOnClickListener {
             val bin = getBin()
-            startBinDetailInfoFragment(bin)
+            when (checkBinLength(bin)) {
+                true -> startBinDetailInfoFragment(bin)
+                false -> showError()
+            }
         }
-
         viewModel.binItem.observe(viewLifecycleOwner) {
             binListAdapter.submitList(it)
         }
-
         setupSwipeListener(binding.recyclerView)
+    }
+
+    private fun checkBinLength(bin: String): Boolean {
+        return bin.length >= MIN_BIN_LENGTH
+    }
+
+    private fun showError() {
+        binding.textInputLayout.error
+        Toast.makeText(
+            context,
+            getString(R.string.bin_unknown),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     private fun setupSwipeListener(recyclerView: RecyclerView) {
@@ -101,5 +116,10 @@ class MainFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+
+        private const val MIN_BIN_LENGTH = 4
     }
 }
